@@ -1,9 +1,7 @@
 package rbk.sunrise.dao;
 
-import rbk.sunrise.entity.IdOnlyEntity;
+import tk.mybatis.mapper.common.Mapper;
 
-import java.io.Serializable;
-
-public class BaseMapper<T extends IdOnlyEntity, PK extends Serializable> {
+public interface BaseMapper<T> extends Mapper<T> {
 
 }
