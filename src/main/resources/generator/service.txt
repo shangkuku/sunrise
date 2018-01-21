@@ -1,0 +1,13 @@
+package rbk.sunrise.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import rbk.sunrise.dao.${Entity}Mapper;
+import rbk.sunrise.entity.${Entity};
+
+@Service
+public class ${Entity}Service extends BaseService<${Entity}> {
+
+    @Autowired
+    ${Entity}Mapper ${entity}Mapper;
+}

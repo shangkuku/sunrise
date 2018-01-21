@@ -1,0 +1,14 @@
+package rbk.sunrise.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import rbk.sunrise.entity.${Entity};
+import rbk.sunrise.service.${Entity}Service;
+
+@Controller
+@RequestMapping("/${entity}")
+public class ${Entity}Controller extends BaseController<${Entity}> {
+    @Autowired
+    ${Entity}Service ${entity}Service;
+}
