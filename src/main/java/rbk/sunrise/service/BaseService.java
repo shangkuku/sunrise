@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class BaseService<T extends IdOnlyEntity, PK extends Serializable> {
 
     @Autowired
-    BaseMapper<T, PK> baseMapper;
+    BaseMapper<T> baseMapper;
 
     public T get(PK pk) {
         return null;

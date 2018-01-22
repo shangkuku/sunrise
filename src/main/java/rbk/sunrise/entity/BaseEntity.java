@@ -1,16 +1,20 @@
 package rbk.sunrise.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class BaseEntity<PK extends Serializable> extends IdOnlyEntity<PK> {
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class BaseEntity<PK extends Serializable> extends IdOnlyEntity<PK> {
 
-    protected Date lastUpdateTime;
+    protected Date lastUpdateTime = new Date();
 
-    protected Date createTime;
+    protected Date createTime = new Date();
 
     protected int version = 0;
 }

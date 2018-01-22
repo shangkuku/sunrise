@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import rbk.sunrise.controller.BaseController;
 import rbk.sunrise.entity.BaseEntity;
+import rbk.sunrise.entity.CloudUser;
 import rbk.sunrise.entity.IdOnlyEntity;
 import rbk.sunrise.service.BaseService;
 import tk.mybatis.mapper.generator.MapperPlugin;
@@ -102,7 +103,7 @@ public class MvcGeneratorPlugin extends MapperPlugin {
         topLevelClass.addImportedType(Controller.class.getCanonicalName());
         topLevelClass.addImportedType(RequestMapping.class.getCanonicalName());
 
-        return generateJavaFile(topLevelClass, this.serviceTargetProject);
+        return generateJavaFile(topLevelClass, this.controllerTargetProject);
     }
 
 
@@ -171,7 +172,7 @@ public class MvcGeneratorPlugin extends MapperPlugin {
      */
     private GeneratedJavaFile generateJavaFile(TopLevelClass topLevelClass, String targetProject) {
         return new GeneratedJavaFile(topLevelClass,
-                this.controllerTargetProject,
+                targetProject,
                 context.getProperty(PropertyRegistry.CONTEXT_JAVA_FILE_ENCODING),
                 context.getJavaFormatter());
     }
@@ -194,15 +195,21 @@ public class MvcGeneratorPlugin extends MapperPlugin {
             isIdOnly = Boolean.parseBoolean(idOnly);
         }
 
+        // 主键
+        Field primaryKeyField =
+                getJavaBeansField(introspectedTable.getPrimaryKeyColumns().get(0), context, introspectedTable);
+        String genericType = "<" + primaryKeyField.getType() + ">";
+
         // 继承的基类是否只包含ID属性，一般用作关联表
+        String superClass;
         if (isIdOnly) {
             topLevelClass.addImportedType(IdOnlyEntity.class.getCanonicalName());
-            topLevelClass.setSuperClass(IdOnlyEntity.class.getSimpleName());
+            superClass = IdOnlyEntity.class.getSimpleName();
         } else {
             topLevelClass.addImportedType(BaseEntity.class.getCanonicalName());
-            topLevelClass.setSuperClass(BaseEntity.class.getSimpleName());
+            superClass = BaseEntity.class.getSimpleName();
         }
-
+        topLevelClass.setSuperClass(superClass + genericType);
 
         // 添加lombok风格实体注解
         if (isLombok) {
