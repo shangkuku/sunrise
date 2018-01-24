@@ -1,8 +1,8 @@
-package rbk.sunrise.entity;
+package rbk.sunrise.base;
 
 import java.io.Serializable;
 
 
 public abstract class IdOnlyEntity<PK extends Serializable> {
-    abstract PK getId();
+    protected abstract PK getId();
 }

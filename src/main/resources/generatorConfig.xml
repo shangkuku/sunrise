@@ -9,7 +9,7 @@
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
         <plugin type="rbk.sunrise.mybatis.generator.MvcGeneratorPlugin">
-            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="mappers" value="rbk.sunrise.base.BaseMapper"/>
             <property name="caseSensitive" value="true"/>
 
             <!--生成 service 和 controller 的路径 -->
@@ -50,7 +50,7 @@
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="cloud_user">
+        <table tableName="cloud_user" domainObjectName="User">
             <!-- 继承idOnlyEntity，否则为BaseEntity 默认为 false -->
             <!--<property name="idOnly" value="true"/>-->
             <property name="" value=""/>

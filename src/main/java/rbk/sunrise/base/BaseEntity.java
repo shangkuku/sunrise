@@ -1,4 +1,4 @@
-package rbk.sunrise.entity;
+package rbk.sunrise.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

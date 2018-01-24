@@ -4,7 +4,6 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
-import rbk.sunrise.entity.CloudUser;
 
 import java.io.File;
 import java.net.URL;

@@ -11,15 +11,13 @@ import org.mybatis.generator.internal.util.StringUtility;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
-import rbk.sunrise.controller.BaseController;
-import rbk.sunrise.entity.BaseEntity;
-import rbk.sunrise.entity.CloudUser;
-import rbk.sunrise.entity.IdOnlyEntity;
-import rbk.sunrise.service.BaseService;
+import rbk.sunrise.base.BaseController;
+import rbk.sunrise.base.BaseEntity;
+import rbk.sunrise.base.IdOnlyEntity;
+import rbk.sunrise.base.BaseService;
 import tk.mybatis.mapper.generator.MapperPlugin;
 
 import java.beans.Introspector;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -74,6 +72,8 @@ public class MvcGeneratorPlugin extends MapperPlugin {
     }
 
 
+
+
     /**
      * 生成额外的Java文件，这里用作生成controller和service
      *
@@ -95,7 +95,7 @@ public class MvcGeneratorPlugin extends MapperPlugin {
     private GeneratedJavaFile generateController(IntrospectedTable introspectedTable) {
         TopLevelClass topLevelClass = generateAdditional(introspectedTable, this.controllerTargetPackage,
                 "Controller", BaseController.class);
-        String domainObjectName = topLevelClass.getType().getShortNameWithoutTypeArguments();
+        String domainObjectName = introspectedTable.getFullyQualifiedTable().getDomainObjectName();
         topLevelClass.addAnnotation("@" + Controller.class.getSimpleName());
         topLevelClass.addAnnotation("@" + RequestMapping.class.getSimpleName()
                 + "(\"/" + Introspector.decapitalize(domainObjectName) + "\")");
@@ -144,6 +144,7 @@ public class MvcGeneratorPlugin extends MapperPlugin {
         // 添加import
         topLevelClass.addImportedType(introspectedTable.getBaseRecordType());
         topLevelClass.addImportedType(field.getType());
+        topLevelClass.addImportedType(baseClass.getCanonicalName());
         return topLevelClass;
     }
 

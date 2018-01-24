@@ -1,4 +1,4 @@
-package rbk.sunrise.dao;
+package rbk.sunrise.base;
 
 import tk.mybatis.mapper.common.Mapper;
 
