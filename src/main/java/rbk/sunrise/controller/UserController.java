@@ -8,5 +8,4 @@ import rbk.sunrise.entity.User;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController<User, Long> {
-
 }

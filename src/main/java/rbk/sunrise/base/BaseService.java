@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
-public class BaseService<T extends IdOnlyEntity, PK extends Serializable> {
+public class BaseService<T extends Entity, PK extends Serializable> {
 
     @Autowired
     BaseMapper<T> baseMapper;

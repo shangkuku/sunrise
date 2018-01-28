@@ -6,9 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import rbk.sunrise.entity.User;
@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SunriseApplication.class)
 @AutoConfigureMockMvc
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class WebUsersTests {
 
     @Autowired
@@ -37,11 +38,11 @@ public class WebUsersTests {
     public void POST_OnUsersWithFullDataShouldReturnIdAndCreatedStatus() throws Exception {
         mockMvc.perform(
                 post("/user")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(toJson(
-                        User.builder().name("Stefan").build()
-                    ))
-                )
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(
+                                User.builder().name("Stefan").build()
+                        ))
+        )
                 .andExpect(status().isCreated())
                 .andExpect(header().string("Location", "/user/1"))
                 .andExpect(content().string("1"));
@@ -51,11 +52,11 @@ public class WebUsersTests {
     public void POST_OnUsersWithSetIdShouldReteurnBadRequest400() throws Exception {
         mockMvc.perform(
                 post("/user")
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(toJson(
-                            User.builder().name("Stefan").build()
-                    ))
-                )
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(toJson(
+                                User.builder().name("Stefan").build()
+                        ))
+        )
                 .andExpect(status().isBadRequest());
     }
 
@@ -78,18 +79,18 @@ public class WebUsersTests {
                 post("/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(
-                                User.builder().name("Stefan").build()
+                                User.builder().build()
                         ))
         )
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("First name is required"));
+                .andExpect(jsonPath("$.message").value("name is required"));
 
     }
 
     @Test
     public void GET_OnUsersWithIdShouldReturnUser() throws Exception {
         mockMvc.perform(get("/user/1"))
-            .andExpect(status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value("Stefan"))
                 .andExpect(jsonPath("$.lastName").value("Stefanowsky"))
                 .andExpect(jsonPath("$.age").value(32))

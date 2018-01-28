@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class BaseEntity<PK extends Serializable> extends IdOnlyEntity<PK> {
+public abstract class BaseEntity<PK extends Serializable> extends Entity<PK> {
 
     protected Date lastUpdateTime = new Date();
 

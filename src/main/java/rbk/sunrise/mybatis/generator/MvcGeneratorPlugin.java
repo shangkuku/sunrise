@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import rbk.sunrise.base.BaseController;
 import rbk.sunrise.base.BaseEntity;
-import rbk.sunrise.base.IdOnlyEntity;
+import rbk.sunrise.base.Entity;
 import rbk.sunrise.base.BaseService;
 import tk.mybatis.mapper.generator.MapperPlugin;
 
@@ -204,8 +204,8 @@ public class MvcGeneratorPlugin extends MapperPlugin {
         // 继承的基类是否只包含ID属性，一般用作关联表
         String superClass;
         if (isIdOnly) {
-            topLevelClass.addImportedType(IdOnlyEntity.class.getCanonicalName());
-            superClass = IdOnlyEntity.class.getSimpleName();
+            topLevelClass.addImportedType(Entity.class.getCanonicalName());
+            superClass = Entity.class.getSimpleName();
         } else {
             topLevelClass.addImportedType(BaseEntity.class.getCanonicalName());
             superClass = BaseEntity.class.getSimpleName();

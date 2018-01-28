@@ -13,7 +13,7 @@ import rbk.sunrise.validation.Group;
 
 import java.io.Serializable;
 
-public abstract class BaseController<T extends IdOnlyEntity, PK extends Serializable> {
+public abstract class BaseController<T extends Entity, PK extends Serializable> {
 
     @Autowired
     BaseService<T, PK> baseService;
@@ -26,6 +26,7 @@ public abstract class BaseController<T extends IdOnlyEntity, PK extends Serializ
         }
         return new ResponseEntity<>(t, HttpStatus.OK);
     }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<T> save(@Validated(Group.New.class) @RequestBody T t) {
