@@ -7,15 +7,15 @@
     -->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
-    <result column="last_modified_time" jdbcType="TIMESTAMP" property="lastModifiedTime" />
-    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, name, sex, created_time, last_modified_time, version
+    id, name, password, create_time, salt, mobile_phone
   </sql>
 </mapper>

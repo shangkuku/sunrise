@@ -197,8 +197,14 @@ public class MvcGeneratorPlugin extends MapperPlugin {
         }
 
         // 主键
+        IntrospectedColumn column =
+        introspectedTable.getPrimaryKeyColumns().stream()
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException(
+                        introspectedTable.getFullyQualifiedTableNameAtRuntime() + "没有主键")
+                );
         Field primaryKeyField =
-                getJavaBeansField(introspectedTable.getPrimaryKeyColumns().get(0), context, introspectedTable);
+                getJavaBeansField(column, context, introspectedTable);
         String genericType = "<" + primaryKeyField.getType() + ">";
 
         // 继承的基类是否只包含ID属性，一般用作关联表

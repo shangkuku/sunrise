@@ -50,7 +50,7 @@
             <property name="trimStrings" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user" domainObjectName="User">
+        <table tableName="rbk_role_permission" domainObjectName="RolePermission">
             <!-- 继承idOnlyEntity，否则为BaseEntity 默认为 false -->
             <property name="idOnly" value="true"/>
             <property name="" value=""/>
