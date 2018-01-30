@@ -17,7 +17,5 @@ public class RolePermission extends Entity<Long> {
     @Column(name = "role_id")
     private Long roleId;
 
-    private Integer permission;
-
-    private String module;
+    private String permission;
 }

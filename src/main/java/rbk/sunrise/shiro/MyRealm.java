@@ -13,6 +13,7 @@ import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import rbk.sunrise.entity.Role;
 import rbk.sunrise.entity.RolePermission;
 import rbk.sunrise.entity.User;
@@ -49,6 +50,11 @@ public class MyRealm extends AuthorizingRealm {
         String principal = (String) getAvailablePrincipal(principals);
 
         User u = getUserByPrincipal(principal);
+        if (u == null) {
+            throw new AuthorizationException("通过principal查不到用户");
+        }
+
+        // 这里只是通过角色来查找权限
         List<Role> roles = roleService.getRolesByUserId(u.getId());
         Set<String> roleNames = roles.stream().map(Role::getCode).collect(Collectors.toSet());
         Set<String> permissions = getPermissions(u.getId());
@@ -63,9 +69,7 @@ public class MyRealm extends AuthorizingRealm {
         if (CollectionUtils.isEmpty(rolePermissionList)) {
             return Collections.EMPTY_SET;
         }
-        // todo
-        return null;
-//        return new HashSet(rolePermissionList.stream().map);
+        return new HashSet(rolePermissionList.stream().map(RolePermission::getPermission).collect(Collectors.toSet()));
     }
 
 

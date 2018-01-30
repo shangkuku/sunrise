@@ -4,11 +4,10 @@
     <resultMap id="BaseResultMap" type="rbk.sunrise.entity.RolePermission">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="role_id" jdbcType="BIGINT" property="roleId"/>
-        <result column="permission" jdbcType="INTEGER" property="permission"/>
-        <result column="module" jdbcType="VARCHAR" property="module"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, role_id, permission, module
+        id, role_id, permission
     </sql>
     <select id="getRolePermissionsByUserId" resultMap="BaseResultMap">
         SELECT rp.* FROM rbk_role_permission rp, rbk_user_role ur

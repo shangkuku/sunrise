@@ -12,8 +12,7 @@ create table rbk_role_permission
 	id bigint not null auto_increment
 		primary key,
 	role_id bigint null,
-	permission int null,
-	module varchar(32) null
+	permission VARCHAR(64) null
 )
 ;
 

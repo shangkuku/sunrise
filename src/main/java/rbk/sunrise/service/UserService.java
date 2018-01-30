@@ -7,4 +7,10 @@ import rbk.sunrise.entity.User;
 @Service
 public class UserService extends BaseService<User, Long> {
 
+
+    @Override
+    public int insert(User user) {
+        user.setSalt();
+    }
+
 }
