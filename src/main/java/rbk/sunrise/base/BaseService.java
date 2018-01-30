@@ -6,44 +6,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 可以通过重写非final方法来实现自己CRUD的逻辑
+ * @param <T>
+ * @param <PK>
+ */
 public class BaseService<T extends Entity, PK extends Serializable> {
 
     @Autowired
-    BaseMapper<T> baseMapper;
+    protected BaseMapper<T> baseMapper;
 
     public T selectByPrimaryKey(PK pk) {
         return baseMapper.selectByPrimaryKey(pk);
     }
 
-    public T selectOne(T t) {
+    public final T selectOne(T t) {
         return baseMapper.selectOne(t);
     }
 
-    public List<T> selectAll() {
+    public final List<T> selectAll() {
         return baseMapper.selectAll();
     }
 
-    public List<T> selectByExample(Object example) {
+    public final List<T> selectByExample(Object example) {
         return baseMapper.selectByExample(example);
     }
 
-    public List<T> selectCountByExample(T t, RowBounds rowBounds) {
+    public final List<T> selectCountByExample(T t, RowBounds rowBounds) {
         return baseMapper.selectByRowBounds(t, rowBounds);
     }
 
-    public List<T> selectByExampleAndRowBounds(T t, RowBounds rowBounds) {
+    public final List<T> selectByExampleAndRowBounds(T t, RowBounds rowBounds) {
         return baseMapper.selectByExampleAndRowBounds(t, rowBounds);
     }
 
-    public int selectCount(T t) {
+    public final int selectCount(T t) {
         return baseMapper.selectCount(t);
     }
 
-    public int selectCountByExample(Object example) {
+    public final int selectCountByExample(Object example) {
         return baseMapper.selectCountByExample(example);
     }
 
-    public int insertSelective(T t) {
+    public final int insertSelective(T t) {
         return baseMapper.insertSelective(t);
     }
 
@@ -59,11 +64,11 @@ public class BaseService<T extends Entity, PK extends Serializable> {
         return baseMapper.updateByPrimaryKey(t);
     }
 
-    public int updateByExampleSelective(T t, Object example) {
+    public final int updateByExampleSelective(T t, Object example) {
         return baseMapper.updateByExampleSelective(t, example);
     }
 
-    public int updateByExample(T t, Object example) {
+    public final int updateByExample(T t, Object example) {
         return baseMapper.updateByExample(t, example);
     }
 
@@ -71,7 +76,7 @@ public class BaseService<T extends Entity, PK extends Serializable> {
         return baseMapper.deleteByPrimaryKey(pk);
     }
 
-    public int deleteByExample(T t) {
+    public final int deleteByExample(T t) {
         return baseMapper.deleteByExample(t);
     }
 }

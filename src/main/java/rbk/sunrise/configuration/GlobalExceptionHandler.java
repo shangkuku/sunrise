@@ -1,10 +1,12 @@
 package rbk.sunrise.configuration;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import rbk.sunrise.exception.ResponseErrorMessage;
 
@@ -15,6 +17,7 @@ import rbk.sunrise.exception.ResponseErrorMessage;
  */
 @ControllerAdvice
 @Order(Ordered.LOWEST_PRECEDENCE)
+@Log4j
 public class GlobalExceptionHandler {
 
     /**
@@ -25,7 +28,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
     public ResponseErrorMessage handleException(Throwable t) {
+        log.error("", t);
         return ResponseErrorMessage.builder().message(t.getMessage()).build();
     }
 

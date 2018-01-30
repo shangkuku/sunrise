@@ -4,7 +4,7 @@ import javax.persistence.*;
 import lombok.*;
 import rbk.sunrise.base.Entity;
 
-@Table(name = "user_role")
+@Table(name = "rbk_user_role")
 @Data
 @Builder
 @NoArgsConstructor

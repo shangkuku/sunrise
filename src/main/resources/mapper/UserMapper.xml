@@ -9,13 +9,12 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, name, password, create_time, salt, mobile_phone
+    id, name, password, create_time, mobile_phone
   </sql>
 </mapper>

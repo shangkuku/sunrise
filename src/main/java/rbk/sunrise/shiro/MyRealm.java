@@ -3,17 +3,15 @@ package rbk.sunrise.shiro;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import rbk.sunrise.entity.Role;
 import rbk.sunrise.entity.RolePermission;
 import rbk.sunrise.entity.User;
@@ -21,7 +19,6 @@ import rbk.sunrise.service.RolePermissionService;
 import rbk.sunrise.service.RoleService;
 import rbk.sunrise.service.UserService;
 
-import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +36,11 @@ public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     RolePermissionService rolePermissionService;
+
+    @Autowired
+    public MyRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
+        super(cacheManager, matcher);
+    }
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -97,20 +99,18 @@ public class MyRealm extends AuthorizingRealm {
 
         User u = getUserByName(username);
         String password = u.getPassword();
-        String salt = u.getSalt();
 
         if (password == null) {
             throw new UnknownAccountException("[" + username + "]没有密码");
         }
         info = new SimpleAuthenticationInfo(username, password.toCharArray(), getName());
 
-        if (salt != null) {
-            info.setCredentialsSalt(ByteSource.Util.bytes(salt));
-        }
+
         return info;
     }
 
     private User getUserByName(String username) {
         return userService.selectOne(User.builder().name(username).build());
     }
+
 }

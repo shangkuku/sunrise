@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import rbk.sunrise.validation.Group;
 
 import java.io.Serializable;
@@ -29,8 +26,9 @@ public abstract class BaseController<T extends Entity, PK extends Serializable> 
 
 
     @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
     public ResponseEntity<T> save(@Validated(Group.New.class) @RequestBody T t) {
-        baseService.insertSelective(t);
+        baseService.insert(t);
         return new ResponseEntity<>(t, HttpStatus.CREATED);
     }
 
