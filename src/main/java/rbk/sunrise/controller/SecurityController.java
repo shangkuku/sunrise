@@ -14,7 +14,6 @@ public class SecurityController {
     @RequestMapping("/login")
     public ResponseEntity login() {
         Subject subject = SecurityUtils.getSubject();
-        subject.getSession();
         if (subject.isAuthenticated()) {
             throw new AuthenticationException("用户已登录");
         }
