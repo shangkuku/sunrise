@@ -4,6 +4,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import rbk.sunrise.exception.KnownException;
 import rbk.sunrise.exception.ResponseErrorMessage;
@@ -25,6 +26,7 @@ public class KnownExceptionHandler {
      */
     @ExceptionHandler(KnownException.class)
     @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public ResponseErrorMessage handleException(KnownException exception) {
         return ResponseErrorMessage.builder().message(exception.getMessage()).error(exception.getError()).build();
     }
