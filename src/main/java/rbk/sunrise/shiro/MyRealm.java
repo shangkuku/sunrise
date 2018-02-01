@@ -98,6 +98,11 @@ public class MyRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo info;
 
         User u = getUserByName(username);
+
+        if (u == null) {
+            throw new AccountException("找不到用户");
+        }
+
         String password = u.getPassword();
 
         if (password == null) {

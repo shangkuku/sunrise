@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SecurityController {
 
+
     @RequestMapping("/login")
     public ResponseEntity login() {
         Subject subject = SecurityUtils.getSubject();
@@ -20,6 +21,11 @@ public class SecurityController {
         UsernamePasswordToken token = new UsernamePasswordToken("admin", "123456", true);
         subject.login(token);
         return ResponseEntity.ok("登录成功");
+    }
+
+    @RequestMapping("/login.html")
+    public String loginHome() {
+        return "login";
     }
 
 

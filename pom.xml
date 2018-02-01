@@ -48,11 +48,10 @@
             <version>1.5.9.RELEASE</version>
         </dependency>
 
-        <!--1.4.0 会出现如下 https://issues.apache.org/jira/browse/SHIRO-627 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>
-            <version>1.4.0-RC2</version>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shiro</groupId>
