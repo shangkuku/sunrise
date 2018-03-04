@@ -30,4 +30,8 @@ public class User extends Entity<Long> {
 
     @Column(name = "mobile_phone")
     private String mobilePhone;
+
+    @Column(name = "last_password_reset_date")
+    private Date lastPasswordResetDate;
+
 }

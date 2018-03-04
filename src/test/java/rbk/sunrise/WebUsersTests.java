@@ -99,7 +99,7 @@ public class WebUsersTests {
 
     @Test
     public void GET_OnUsersWithWrongIdShouldReturnNotFound404() throws Exception {
-        mockMvc.perform(get("/user/3"))
+        mockMvc.perform(get("/user/4"))
                 .andExpect(status().isNotFound());
     }
 
