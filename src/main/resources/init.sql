@@ -7,15 +7,6 @@ create table rbk_role
 )
 ;
 
-create table rbk_role_permission
-(
-	id bigint not null auto_increment
-		primary key,
-	role_id bigint null,
-	permission VARCHAR(256) null
-)
-;
-
 create table rbk_user
 (
 	id bigint not null auto_increment
@@ -23,7 +14,8 @@ create table rbk_user
 	name varchar(32) null,
 	password varchar(256) null,
 	create_time datetime null,
-	mobile_phone varchar(32) null
+	mobile_phone varchar(32) null,
+	last_password_reset_date DATETIME null
 )
 ;
 

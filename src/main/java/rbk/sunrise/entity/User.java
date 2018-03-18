@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import rbk.sunrise.base.Entity;
 import rbk.sunrise.validation.Group;
@@ -23,6 +24,7 @@ public class User extends Entity<Long> {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
     @Column(name = "create_time")

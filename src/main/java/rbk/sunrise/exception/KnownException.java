@@ -10,5 +10,5 @@ import lombok.Data;
 public class KnownException extends RuntimeException {
     protected String message;
     protected Throwable throwable;
-    protected int error = -1;
+    protected Integer error = -1;
 }

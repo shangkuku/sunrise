@@ -14,7 +14,7 @@ public class ResponseErrorMessage {
     /**
      * 错误代码 -1为默认
      */
-    protected int error = -1;
+    protected Integer error = -1;
 
     /**
      * 消息内容

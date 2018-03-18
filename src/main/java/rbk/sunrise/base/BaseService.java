@@ -2,17 +2,15 @@ package rbk.sunrise.base;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 可以通过重写非final方法来实现自己CRUD的逻辑
- * @param <T>
- * @param <PK>
- */
+
 public class BaseService<T extends Entity, PK extends Serializable> {
+
 
     @Autowired
     protected BaseMapper<T> baseMapper;
@@ -21,35 +19,39 @@ public class BaseService<T extends Entity, PK extends Serializable> {
         return baseMapper.selectByPrimaryKey(pk);
     }
 
-    public final T selectOne(T t) {
+    public T selectOne(T t) {
         return baseMapper.selectOne(t);
     }
 
-    public final List<T> selectAll() {
+    public List<T> select(T t) {
+        return baseMapper.select(t);
+    }
+
+    public List<T> selectAll() {
         return baseMapper.selectAll();
     }
 
-    public final List<T> selectByExample(Object example) {
+    public List<T> selectByExample(Object example) {
         return baseMapper.selectByExample(example);
     }
 
-    public final List<T> selectCountByExample(T t, RowBounds rowBounds) {
+    public List<T> selectCountByExample(T t, RowBounds rowBounds) {
         return baseMapper.selectByRowBounds(t, rowBounds);
     }
 
-    public final List<T> selectByExampleAndRowBounds(T t, RowBounds rowBounds) {
+    public List<T> selectByExampleAndRowBounds(T t, RowBounds rowBounds) {
         return baseMapper.selectByExampleAndRowBounds(t, rowBounds);
     }
 
-    public final int selectCount(T t) {
+    public int selectCount(T t) {
         return baseMapper.selectCount(t);
     }
 
-    public final int selectCountByExample(Object example) {
+    public int selectCountByExample(Object example) {
         return baseMapper.selectCountByExample(example);
     }
 
-    public final int insertSelective(T t) {
+    public int insertSelective(T t) {
         return baseMapper.insertSelective(t);
     }
 
@@ -65,11 +67,11 @@ public class BaseService<T extends Entity, PK extends Serializable> {
         return baseMapper.updateByPrimaryKey(t);
     }
 
-    public final int updateByExampleSelective(T t, Object example) {
+    public int updateByExampleSelective(T t, Object example) {
         return baseMapper.updateByExampleSelective(t, example);
     }
 
-    public final int updateByExample(T t, Object example) {
+    public int updateByExample(T t, Object example) {
         return baseMapper.updateByExample(t, example);
     }
 
@@ -77,7 +79,7 @@ public class BaseService<T extends Entity, PK extends Serializable> {
         return baseMapper.deleteByPrimaryKey(pk);
     }
 
-    public final int deleteByExample(T t) {
+    public int deleteByExample(T t) {
         return baseMapper.deleteByExample(t);
     }
 }

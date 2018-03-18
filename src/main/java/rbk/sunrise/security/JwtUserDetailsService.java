@@ -5,10 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import rbk.sunrise.dao.RolePermissionMapper;
+import rbk.sunrise.dao.RoleMapper;
 import rbk.sunrise.dao.UserMapper;
-import rbk.sunrise.entity.RolePermission;
+import rbk.sunrise.entity.Role;
 import rbk.sunrise.entity.User;
 
 import java.util.List;
@@ -24,19 +23,19 @@ public class JwtUserDetailsService implements UserDetailsService {
     private UserMapper userMapper;
 
     @Autowired
-    private RolePermissionMapper rolePermissionMapper;
+    private RoleMapper roleMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.selectOne(User.builder().name(username).build());
 
-        List<RolePermission> permissionList = rolePermissionMapper.getRolePermissionsByUserId(user.getId());
+        List<Role> roleList = roleMapper.getRolesByUser(user);
 
 
         if (user == null) {
             throw new UsernameNotFoundException(String.format("No user found with username '%s'.", username));
         } else {
-            return JwtUserFactory.create(user, permissionList);
+            return JwtUserFactory.create(user, roleList);
         }
     }
 }
